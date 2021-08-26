@@ -1,0 +1,26 @@
+{% extends 'resume_creator/master/master.html' %}
+
+{% load static %}
+
+{% block title %} Build resume {% endblock %}
+
+{% block site_css %}   
+<link rel="stylesheet" href="{% static 'resume_creator/styles/index.css' %}">
+{% endblock %}
+
+
+{% block header_content %}
+    <p>Easy Online Builder!</p>
+{% endblock %}
+
+
+{% block body %}
+{% if user.is_authenticated %}
+<section id="start">
+    <p>Hi {{ user }}</p>
+    <a href="{% url 'personal' %}" class="btn"> Lets Get Started</a>
+</section>
+{% else %}
+<p>You need to login first. Login <a href="/login"> Here </a></p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'resume_creator/master/master.html' %}
+
+{% load static %}
+
+{% block title %} Create Account{% endblock %}
+
+{% load crispy_forms_tags  %}
+
+{% block site_css %}   
+{% endblock %}
+
+
+{% block header_content %}
+    <p>Register Here!</p>
+{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<p>You are logged in. Logout first to register.</p>
+{% else %}
+<section id="start">
+    <form method ="POST" class="form-group">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
+</section>
+{% endif %}
+{% endblock %}

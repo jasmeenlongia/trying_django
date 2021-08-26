@@ -1,0 +1,60 @@
+{% extends 'resume_creator/master/master.html' %}
+
+{% load static %}
+
+{% block title %} Enter info {% endblock %}
+
+{% block site_css %} 
+<link rel="stylesheet" href="{% static 'resume_creator/styles/personal_info.css' %}">
+<link rel="stylesheet" href="{% static 'resume_creator/styles/index.css' %}"> 
+{% endblock %}
+
+
+{% block header_content %}
+    <h3>Enter Your Details</h3>
+{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<section id="registration">
+    <form action="{% url 'personal' %}" method="POST">
+        {% csrf_token %}
+        <article>
+            <h2>Personal Details</h2>
+            <ul>
+                {{ form.as_ul }}
+            </ul>
+        </article>
+
+        <article>
+            <h2>Education</h2>
+            <ul>
+                {{ edu_form.as_ul }}
+            </ul>
+            <ul id="second_edu"></ul>
+            <ul id="third_edu"></ul>
+        </article>
+
+        <article>
+            <h2>Work Experience</h2>
+            <ul>
+                {{ work_form.as_ul }}
+            </ul>
+        </article>
+
+        <article>
+            <div id="registration-actions">
+                <button>Next</button>
+            </div>  
+        </article> 
+    </form>
+</section>
+<script>
+    function addEdu(){
+        document.getElementById("second_edu").innerHTML = "{{ edu_form.as_ul }}"
+    }
+</script>
+{% else %}
+<p>You need to login first. Login <a href="/login"> Here </a></p>
+{% endif %}
+{% endblock %}

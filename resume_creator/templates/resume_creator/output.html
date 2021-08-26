@@ -1,0 +1,115 @@
+{% extends 'resume_creator/master/master.html' %}
+
+{% load static %}
+
+{% block title %} Resume {% endblock %}
+
+{% block site_css %}   
+<link rel="stylesheet" href="{% static 'resume_creator/styles/output.css' %}">
+{% endblock %}
+
+
+{% block header_content %}
+    <h3>Here's your Resume</h3>
+    <p>{{ info_slug }}</p>
+{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div id="cv" class="instaFade">
+    <div class="mainDetails">
+
+        <div id="name">
+            <h1 class="quickFade delayTwo">{{ info.f_name }} {{ info.l_name }}</h1>
+        </div>
+
+        <div id="contactDetails" class="quickFade delayFour">
+            <ul>
+                <li>Email: {{info.email}}</li>
+                <li>Address: {{info.address}}, {{info.city}}, {{info.state}} ({{info.zip}})</li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+
+    <div id="mainArea" class="quickFade delayFive">
+
+        {%  if work.title or work.company or work.description %}
+        <section>
+            <div class="sectionTitle">
+                <h1>
+                    Work Experience
+                </h1>
+            </div>
+
+            <div class="sectionContent">
+                <article>
+                    {%  if work.title %}
+                    <h2>{{ work.title }}</h2>
+                    {% endif %}
+
+                    {%  if work.company %}
+                    <p class="subDetails">{{work.company}}</p>
+                    {% endif %}
+
+                    {%  if work.description %}
+                    <p> {{work.description}}</p>
+                    {% endif %}
+                </article>
+            </div>
+
+            <div class="clear"></div>
+        </section>
+        {% endif %}
+
+        {%  if edu.degree or edu.stream or edu.passing_year %}
+        <section>
+            <div class="sectionTitle">
+                    <h1>Education</h1>
+
+            </div>
+            <div class="sectionContent">
+                <article>
+                    {%  if edu.degree %}
+                    <h2>{{ edu.degree }}</h2>
+                    {% endif %}
+
+                    {%  if edu.stream %}
+                    <p class="subDetails">{{edu.stream}}</p>
+                    {% endif %}
+
+                    {%  if edu.passing_year %}
+                    <p class="subDetails">Graduation Date: {{edu.passing_year}}</p>
+                    {% endif %}
+                </article>
+            </div>
+            <div class="clear"></div>
+        </section>
+        {% endif %}
+
+        <section>
+            <div class="sectionTitle">
+                <h1>Key Skills</h1>
+            </div>
+
+            <div class="sectionContent">
+                <ul class="keySkills">
+                    <li>{{skills_1}}</li>
+                    <li>{{skills_2}}</li>
+                    <li>{{skills_3}}</li>
+                    <li>{{skills_4}}</li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </section>
+
+    </div>
+</div>
+
+{% else %}
+<p>Login<a href="/login"> Here</a></p>
+{% endif %}
+
+{% endblock %}

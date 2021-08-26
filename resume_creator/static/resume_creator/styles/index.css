@@ -1,0 +1,21 @@
+button,
+.btn {
+  cursor: pointer;
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  background-color: #350490;
+  border: 1px solid #350490;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #230161;
+  border-color: #230161;
+}
+
+#start {
+    text-align: center;
+}
